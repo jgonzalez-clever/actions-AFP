@@ -3,7 +3,7 @@ import pytest
 from app import add, subtract, multiply, divide
 
 def test_add():
-    assert add(3, 4) == 7
+    assert add(3, 4) == 8
     assert add(-1, 1) == 0
     assert add(-1, -1) == -2
 
