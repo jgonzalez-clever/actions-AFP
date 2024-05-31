@@ -41,10 +41,6 @@ jobs:
         retention-days: 1
 
     - name: Extract coverage percentage
-      id: coverage
       run: |
         coverage=$(grep -oP 'Statements.*?(\d+(?:\.\d+)?)%' coverage/test-reporter.xml | grep -oP '\d+(?:\.\d+)?')
-        echo "::set-output name=coverage::$coverage"
-
-    - name: Print coverage percentage
-      run: echo "Coverage ${{ steps.coverage.outputs.coverage }}%"
+        echo "Coverage $coverage"
