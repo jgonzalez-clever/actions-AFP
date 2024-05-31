@@ -26,7 +26,9 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: scripts/script.sh
+      run: |
+        chmod +x scripts/script.sh
+        scripts/script.sh
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
