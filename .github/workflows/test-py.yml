@@ -25,7 +25,7 @@ jobs:
       with:
         python-version: 3.11
 
-    - name: Install dependencies
+    - name: Run script bash
       run: |
         chmod +x scripts/script.sh
         scripts/script.sh
