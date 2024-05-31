@@ -12,8 +12,6 @@ coverage=$(grep -oP 'Statements.*?(\d+(?:\.\d+)?)%' coverage/test-reporter.xml |
 
 if [[ -z "$coverage" ]]; then
   echo "No se encontró 'Statements' en coverage/test-reporter.xml"
-  # Asigna un valor por defecto o maneja el error según sea necesario
-  coverage="0.0"
 else
   echo "Cobertura encontrada: $coverage%"
 fi
