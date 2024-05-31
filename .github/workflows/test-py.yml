@@ -41,6 +41,7 @@ jobs:
         retention-days: 1
 
     - name: Extract coverage percentage
+      if: false
       run: |
         coverage=$(grep -oP 'Statements.*?(\d+(?:\.\d+)?)%' coverage/test-reporter.xml | grep -oP '\d+(?:\.\d+)?')
         echo "Coverage $coverage"
