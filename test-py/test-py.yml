@@ -1,0 +1,50 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    #container:
+    #  image: python:3.11-bullseye
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: pip install --no-cache-dir -r requirements.txt
+
+    - name: Run tests
+      run: |
+        python test.py
+        pytest test.py --cov --cov-report xml:coverage/test-reporter.xml
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage/test-reporter.xml
+        retention-days: 1
+
+    - name: Extract coverage percentage
+      id: coverage
+      run: |
+        coverage=$(grep -oP 'Statements.*?(\d+(?:\.\d+)?)%' coverage/test-reporter.xml | grep -oP '\d+(?:\.\d+)?')
+        echo "::set-output name=coverage::$coverage"
+
+    - name: Print coverage percentage
+      run: echo "Coverage ${{ steps.coverage.outputs.coverage }}%"
